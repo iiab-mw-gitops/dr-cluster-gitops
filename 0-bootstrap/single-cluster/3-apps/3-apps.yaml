@@ -47,7 +47,7 @@ kind: AppProject
 metadata:
   name: applications-dr
   labels:
-    gitops.tier.layer: applications
+    gitops.tier.layer: applications-dr
 spec:
   sourceRepos: []  # Populated by kustomize patches in 3-apps/kustomization.yaml
   destinations:
