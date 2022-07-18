@@ -62,6 +62,17 @@ patches:
       value: https://github.com/iiab-middleware-giops/multi-tenancy-gitops-apps.git
 - target:
     group: argoproj.io
+    kind: AppProject
+    labelSelector: "gitops.tier.layer=applications-dr"
+  patch: |-
+    - op: add
+      path: /spec/sourceRepos/-
+      value: https://github.com/iiab-middleware-giops/multi-tenancy-gitops.git
+    - op: add
+      path: /spec/sourceRepos/-
+      value: https://github.com/iiab-middleware-giops/multi-tenancy-gitops-apps.git
+- target:
+    group: argoproj.io
     kind: Application
   patch: |-
     - op: replace
