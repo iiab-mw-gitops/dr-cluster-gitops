@@ -32,10 +32,10 @@ patches:
     - op: add
       path: /spec/sourceRepos/-
       value: https://github.com/iiab-middleware-giops/multi-tenancy-gitops-apps.git
-- target:
-    group: argoproj.io
-    kind: ApplicationSet
-  patch: |-
-    - op: replace
-      path: /spec/destination/namespace
-      value: openshift-gitops
+# - target:
+    # group: argoproj.io
+    # kind: ApplicationSet
+  # patch: |-
+    # - op: replace
+      # path: /spec/destination/namespace
+      # value: openshift-gitops
