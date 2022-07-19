@@ -1,5 +1,5 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
   name: apps-ace-ci
   annotations:
@@ -9,13 +9,24 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    namespace: openshift-gitops
-    server: https://kubernetes.default.svc
-  project: applications
-  source: # repoURL  and targetRevision populated by kustomize patches in 3-apps/kustomization.yaml
-    path: ace/config/argocd/ci
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  generators:
+  - list:
+      elements:
+          - cluster: cluster-one
+            url: https://kubernetes.default.svc
+          - cluster: cluster-two
+            url: https://c111-e.us-east.containers.cloud.ibm.com:31784
+  template:
+    metadata:
+      name: '{{cluster}}-apps-ace-ci'
+    spec:
+     project: applications
+     source: # repoURL  and targetRevision populated by kustomize patches in 3-apps/kustomization.yaml
+       path: ace/config/argocd/ci
+     destination:
+        server: '{{url}}'
+        namespace: openshift-gitops
+     syncPolicy:
+       automated:
+         prune: true
+         selfHeal: true
