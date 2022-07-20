@@ -45,15 +45,11 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: applications-dr
-  annotations:
-    argocd.argoproj.io/sync-wave: "300"
-  labels:
-    gitops.tier.layer: gitops
 spec:
   destination:
     namespace: openshift-gitops
-    server: default/c111-e-us-east-containers-cloud-ibm-com:31784/IAM#nisreen_hajhusein@jbs.com.jo
-  project: applications
+    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+  project: default
   source: # repoURL  and targetRevision populated by kustomize patches in 3-apps/kustomization.yaml
     path: 3-apps
   syncPolicy:
