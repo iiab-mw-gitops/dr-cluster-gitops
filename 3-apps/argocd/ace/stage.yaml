@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: apps-ace-stage-dr
+  name: apps-ace-stage
   annotations:
     argocd.argoproj.io/sync-wave: "300"
   labels:
