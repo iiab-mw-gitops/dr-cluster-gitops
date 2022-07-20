@@ -76,7 +76,7 @@ The reference architecture for this GitOps workflow can be found [here](https://
     mkdir -p gitops-repos
     cd gitops-repos
     # Clone using SSH
-    git clone git@github.com:<GIT_ORG>/multi-tenancy-gitops.git
+    git clone git@github.com:<GIT_ORG>/dr-cluster-gitops.git
     git clone git@github.com:<GIT_ORG>/multi-tenancy-gitops-infra.git
     git clone git@github.com:<GIT_ORG>/multi-tenancy-gitops-services.git
     ```

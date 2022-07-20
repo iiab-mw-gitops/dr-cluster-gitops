@@ -1,0 +1,62 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: applications
+  labels:
+    gitops.tier.layer: applications
+spec:
+  sourceRepos: []  # Populated by kustomize patches in 3-apps/kustomization.yaml
+  destinations:
+  - namespace: ci
+    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+  - namespace: dev
+    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+  - namespace: staging
+    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+  - namespace: prod
+    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+  - namespace: tools
+    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+  - namespace: ibm-common-services
+    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+  - namespace: cloudpak
+    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+  - namespace: openshift-gitops
+    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+  clusterResourceWhitelist:
+  # TODO: SCC needs to be moved to 1-infra, here for now pipeline sa for buildah
+  - group: "security.openshift.io"
+    kind: SecurityContextConstraints
+  - group: "rbac.authorization.k8s.io"
+    kind: ClusterRole
+  - group: "rbac.authorization.k8s.io"
+    kind: ClusterRoleBinding
+  roles:
+  # A role which provides read-only access to all applications in the project
+  - name: read-only
+    description: Read-only privileges to my-project
+    policies:
+    - p, proj:my-project:read-only, applications, get, my-project/*, allow
+    groups:
+    - argocd-admins
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: applications
+  annotations:
+    argocd.argoproj.io/sync-wave: "300"
+  labels:
+    gitops.tier.layer: gitops
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+  project: applications
+  source: # repoURL  and targetRevision populated by kustomize patches in 3-apps/kustomization.yaml
+    path: 3-apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
