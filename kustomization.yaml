@@ -1,8 +1,9 @@
 resources:
 #- 1-infra/1-infra.yaml
 #- 2-services/2-services.yaml
-- temp-app1.yaml
 - 3-apps/3-apps.yaml
+- temp-app1.yaml
+
 patches:
 - target:
     group: argoproj.io
