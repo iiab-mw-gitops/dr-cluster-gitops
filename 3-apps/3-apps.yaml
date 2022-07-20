@@ -45,6 +45,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: applications-dr
+  annotations:
+    argocd.argoproj.io/sync-wave: "300"
+  labels:
+    gitops.tier.layer: gitops
 spec:
   destination:
     namespace: openshift-gitops
