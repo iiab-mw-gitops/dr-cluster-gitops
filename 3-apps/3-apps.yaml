@@ -9,21 +9,21 @@ spec:
   sourceRepos: []  # Populated by kustomize patches in 3-apps/kustomization.yaml
   destinations:
   - namespace: ci
-    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+    server: '*'
   - namespace: dev
-    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+    server: '*'
   - namespace: staging
-    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+    server: '*'
   - namespace: prod
-    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+    server: '*'
   - namespace: tools
-    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+    server: '*'
   - namespace: ibm-common-services
-    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+    server: '*'
   - namespace: cloudpak
-    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+    server: '*'
   - namespace: openshift-gitops
-    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+    server: '*'
   clusterResourceWhitelist:
   # TODO: SCC needs to be moved to 1-infra, here for now pipeline sa for buildah
   - group: "security.openshift.io"
@@ -52,7 +52,7 @@ metadata:
 spec:
   destination:
     namespace: openshift-gitops
-    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+    server: https://kubernetes.default.svc
   project: default
   source: # repoURL  and targetRevision populated by kustomize patches in 3-apps/kustomization.yaml
     path: 3-apps
