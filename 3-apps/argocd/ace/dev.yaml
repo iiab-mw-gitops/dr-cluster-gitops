@@ -11,7 +11,7 @@ metadata:
 spec:
   destination:
     namespace: openshift-gitops
-    server: https://c111-e.us-east.containers.cloud.ibm.com:31784
+    server: https://kubernetes.default.svc
   project: applications
   source:
     path: ace/config/argocd/dev

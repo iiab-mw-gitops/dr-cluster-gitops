@@ -22,4 +22,4 @@ spec:
         path: .
       destination:
         server: '{{url}}'
-        namespace: auto-poc
+        namespace: openshift-gitops
