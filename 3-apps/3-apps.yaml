@@ -52,7 +52,7 @@ metadata:
 spec:
   destination:
     namespace: openshift-gitops
-    server: '*'
+    server: https://kubernetes.default.svc
   project: default
   source: # repoURL  and targetRevision populated by kustomize patches in 3-apps/kustomization.yaml
     path: 3-apps
